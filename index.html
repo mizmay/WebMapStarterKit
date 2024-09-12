@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <title>Rent Affordability in San Francisco, 2013</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.3.1/dist/maplibre-gl.css" crossorigin="anonymous">
+        <script src="https://unpkg.com/maplibre-gl@3.3.1/dist/maplibre-gl.js" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/pmtiles@3.0.5/dist/pmtiles.js"></script>
+        <style>
+            body {
+                margin: 0;
+            }
+            #map {
+                height:100%; width:100%;
+            }
+            .maplibregl-popup-content > * {
+                /* make popup content denser */
+                margin-top: 0.5em;
+                margin-bottom: 0.5em;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+        <script type="text/javascript">
+
+            // add the PMTiles plugin to the maplibregl global.
+            let protocol = new pmtiles.Protocol();
+            maplibregl.addProtocol("pmtiles",protocol.tile);
+
+            let PMTILES_URL = "./MyData.pmtiles";
+
+            const p = new pmtiles.PMTiles(PMTILES_URL);
+
+            // this is so we share one instance across the JS code and the map renderer
+            protocol.add(p);
+
+            // we first fetch the header so we can get the center lon, lat of the map.
+            p.getHeader().then(async h => {
+                const map = new maplibregl.Map({
+                    container: 'map',
+                    zoom: h.minZoom,
+                    center: [h.centerLon, h.centerLat],
+                    style: "./map_layers.json"
+                });
+
+                // fetch the interactive layer as geoJSON
+                let res = await fetch('./interactive_data.geojson');
+                let data = await res.json();
+
+                // add the geojson data as a source + layer to the map
+                map.addSource("interaction", { type: "geojson", data });
+                map.addLayer({
+                    "id": "interaction",
+                    "source": "interaction_layer",
+                    "type": "fill",
+                    "paint": {
+                        // make the geojson polygons transparent - for now they're only
+                        // needed for on-click interactions, not for visuals
+                        "fill-color": "rgba(0, 0, 0, 0)"
+                    }
+                });
+
+                map.on('click', (event) => {
+                    // query features under the cursor, and filter to just area you have data for
+                    let features = map.queryRenderedFeatures(event.point)
+                        .filter(feature => feature.layer.source === "interaction_layer");
+
+                    if (features.length === 0) {
+                        // no features found under cursor
+                        return;
+                    }
+
+                    let feature = features[0];
+
+                    if (feature.properties.sample_siz <= 0.0) {
+                        // no data for this feature
+                        return;
+                    }
+
+                    // create a popup, set its map position and html content, and add it to the map
+                    let popup = new maplibregl.Popup();
+                    popup.setLngLat(event.lngLat);
+                    popup.setHTML(`
+                        <h3>${feature.properties.name}</h3>
+                        <p>
+                            Add more text and embed other properties here.
+                        </p>
+                    `);
+                    popup.setMaxWidth(290); // slightly wider than default
+                    popup.addTo(map);
+                });
+            });
+        </script>
+    </body>
+</html>
