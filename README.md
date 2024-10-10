@@ -34,7 +34,7 @@ Under **Branch**, select "main", then press **Save**
 
 Click on **Visit Site** near the top. You should now be able to see it working via a URL like "https://<yourgithubhandle>.github.io/WebMapStarterKit/".
 
-[Click here](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site#creating-your-site)for more detailed instructions on Github Pages.
+[Click here](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site#creating-your-site) for more detailed instructions on Github Pages.
 
 ### 3. Get the example working locally via your personal computer
 
@@ -42,9 +42,11 @@ Clone your copy of this repo to your local hard drive if you haven't already.
 
 Open up `index.html` and change the title. Commit and push to see the change via Github Pages.
 
-[ WIP ] more detailed instructions for how to set up a local web development environment.
+For developing locally, I use [Visual Studio Code](https://code.visualstudio.com/) with [Live Preview](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) installed, but you can use any text editor for this, and preview your changes by setting up a local server (assuming you have [Node](https://runjs.app/blog/how-to-start-a-node-server) or [Python](https://realpython.com/python-http-server/) installed).
 
 ### 4. Swap out the data with your own PMTiles archive (and interactivity layer)
+
+This should be as simple as renaming the files.
 
 ### 5. Edit the reference map layers via the stylesheet
 
