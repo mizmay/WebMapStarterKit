@@ -27,7 +27,7 @@
             let protocol = new pmtiles.Protocol();
             maplibregl.addProtocol("pmtiles",protocol.tile);
 
-            let PMTILES_URL = "./MyData.pmtiles";
+            let PMTILES_URL = "https://mizmay.github.io/WebMapStarterKit/MyData.pmtiles";
 
             const p = new pmtiles.PMTiles(PMTILES_URL);
 
@@ -44,14 +44,14 @@
                 });
 
                 // fetch the interactive layer as geoJSON
-                let res = await fetch('./interactive_data.geojson');
+                let res = await fetch('./interaction.geojson');
                 let data = await res.json();
 
                 // add the geojson data as a source + layer to the map
                 map.addSource("interaction", { type: "geojson", data });
                 map.addLayer({
-                    "id": "interaction",
-                    "source": "interaction_layer",
+                    "id": "interaction_layer",
+                    "source": "interaction",
                     "type": "fill",
                     "paint": {
                         // make the geojson polygons transparent - for now they're only
@@ -63,7 +63,7 @@
                 map.on('click', (event) => {
                     // query features under the cursor, and filter to just area you have data for
                     let features = map.queryRenderedFeatures(event.point)
-                        .filter(feature => feature.layer.source === "interaction_layer");
+                        .filter(feature => feature.layer.source === "interaction");
 
                     if (features.length === 0) {
                         // no features found under cursor
@@ -81,7 +81,7 @@
                     let popup = new maplibregl.Popup();
                     popup.setLngLat(event.lngLat);
                     popup.setHTML(`
-                        <h3>${feature.properties.name}</h3>
+                        <h3>${feature.properties.Nhood}</h3>
                         <p>
                             Add more text and embed other properties here.
                         </p>
