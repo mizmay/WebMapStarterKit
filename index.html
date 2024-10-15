@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Sample Web Map</title>
+        <title>2020 Election Results - Populous Counties</title>
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.3.1/dist/maplibre-gl.css" crossorigin="anonymous">
         <script src="https://unpkg.com/maplibre-gl@3.3.1/dist/maplibre-gl.js" crossorigin="anonymous"></script>
@@ -12,10 +12,15 @@
             #map {
                 height:100%; width:100%;
             }
+            .maplibregl-popup > * {
+                border-radius: 6px;
+                opacity: 0.75;
+            }
             .maplibregl-popup-content > * {
                 /* make popup content denser */
-                margin-top: 0.5em;
-                margin-bottom: 0.5em;
+                margin: 0;
+                padding: 0;
+                width: 180px;
             }
         </style>
     </head>
@@ -23,66 +28,77 @@
         <div id="map"></div>
         <script type="text/javascript">
 
+            let hoveredStateId = null;
+
             // add the PMTiles plugin to the maplibregl global.
             let pm = new pmtiles.Protocol();
             maplibregl.addProtocol("pmtiles",pm.tile);
 
             let PMTILES_URL = "https://mizmay.github.io/WebMapStarterKit/MyData.pmtiles";
-
             const p = new pmtiles.PMTiles(PMTILES_URL);
-
-            // this is so we share one instance across the JS code and the map renderer
             pm.add(p);
 
             // we first fetch the header so we can get the center lon, lat of the map.
-            p.getHeader().then(async h => {
+            p.getHeader().then(h => {
                 const map = new maplibregl.Map({
                     container: 'map',
-                    zoom: h.minZoom,
+                    zoom: h.minZoom+2,
                     center: [h.centerLon, h.centerLat],
-                    style: "./map_layers.json"
-                });
-
-                // add the geojson data as a source + layer to the map
-                map.addSource("interaction", { type: "geojson", data });
-                map.addLayer({
-                    "id": "interaction_layer",
-                    "source": "interaction",
-                    "type": "fill",
-                    "paint": {
-                        // make the geojson polygons transparent - for now they're only
-                        // needed for on-click interactions, not for visuals
-                        "fill-color": "rgba(0, 0, 0, 0)"
+                    style: {
+                        version: 8,
+                        sources: {
+                            'MyData': {
+                                type: "vector",
+                                url: "pmtiles://" + PMTILES_URL,
+                                attribution: '© <a href="https://electionlab.mit.edu/data">MIT Election Lab</a>, <a href="https://www.naturalearthdata.com/">Natural Earth</a>',
+                            }
+                        },
+                        layers: [
+                            {
+                                'id': 'counties',
+                                'source': 'MyData',
+                                'source-layer': 'counties',
+                                'type': 'fill',
+                                'paint': {
+                                    'fill-color': ['get','fill_color'],
+                                }
+                            },
+                            {
+                                'id': 'states',
+                                'source': 'MyData',
+                                'source-layer': 'states',
+                                'type': 'fill',
+                                'paint': {  'fill-color': 'transparent',
+                                            'fill-outline-color': 'black',
+                                            'fill-opacity': [ 'case', ['==', ['get', 'swing'], 1], 1, 0]
+                                        }
+                            }
+                        ]
                     }
                 });
 
                 map.on('click', (event) => {
-                    // query features under the cursor, and filter to just area you have data for
+                    // of all possible features under the cursor, filter to just the counties
                     let features = map.queryRenderedFeatures(event.point)
-                        .filter(feature => feature.layer.source === "interaction");
+                        .filter(feature => feature.layer.id === "counties");
 
                     if (features.length === 0) {
-                        // no features found under cursor
+                        // no counties found under cursor
                         return;
                     }
 
                     let feature = features[0];
 
-                    if (feature.properties.sample_siz <= 0.0) {
-                        // no data for this feature
-                        return;
-                    }
-
                     // create a popup, set its map position and html content, and add it to the map
-                    let popup = new maplibregl.Popup();
+                    let popup = new maplibregl.Popup({ closeButton: false });
                     popup.setLngLat(event.lngLat);
                     popup.setHTML(`
-                        <h3>${feature.properties.Nhood}</h3>
                         <p>
-                            Add more text and embed other properties here.
+                            <b>${feature.properties.winner}</b> won this county in 2020 with  
+                            <b>${feature.properties.votes}</b> votes, <b>${feature.properties.votes_sqkm}</b> 
+                            votes per square kilometer.
                         </p>
                     `);
-                    popup.setMaxWidth(290); // slightly wider than default
                     popup.addTo(map);
                 });
             });
