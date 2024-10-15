@@ -81,7 +81,28 @@
                                         }
                             },
                             {
-                                'id': 'major_city',
+                                'id': 'state_labels',
+                                'source': 'MyData',
+                                'source-layer': 'swing_state_labels',
+                                'type': 'symbol',
+                                'minzoom': 3,
+                                'layout': {
+                                    'text-field': ['get','name'],
+                                    'text-size': {'stops': [[3, 10], [10, 18]], 'base': 1},
+                                    'text-font': ['Stadia Regular'],
+                                    "text-transform": "uppercase",
+                                    "text-letter-spacing": 0.25,
+                                    "symbol-avoid-edges": true,
+                                },
+                                'paint': {
+                                    "text-color": "rgb(117, 129, 145)",
+                                    "text-halo-color": "rgb(242,243,240)",
+                                    "text-halo-width": 1,
+                                    "text-halo-blur": 1,
+                                }
+                            },
+                            {
+                                'id': 'major_city_label',
                                 'type': 'symbol',
                                 'source': 'openmaptiles',
                                 'source-layer': 'place',
@@ -96,11 +117,10 @@
                                     ]
                                 ],
                                 'layout': {
-                                    'text-size': {'stops': [[4, 11], [12, 18], [14, 22]], 'base': 1},
+                                    'text-size': {'stops': [[4, 11], [12, 18]], 'base': 1},
                                     'icon-image': {'base': 1, 'stops': [[0, 'circle-11'], [8, '']]},
                                     'text-font': ['Stadia Regular'],
                                     'text-justify': 'left',
-                                    'visibility': 'visible',
                                     'text-offset': [0.5, 0.2],
                                     'icon-size': 0.4,
                                     'text-anchor': {'base': 1, 'stops': [[0, 'left'], [8, 'center']]},
