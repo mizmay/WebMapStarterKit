@@ -24,15 +24,15 @@
         <script type="text/javascript">
 
             // add the PMTiles plugin to the maplibregl global.
-            let protocol = new pmtiles.Protocol();
-            maplibregl.addProtocol("pmtiles",protocol.tile);
+            let pm = new pmtiles.Protocol();
+            maplibregl.addProtocol("pmtiles",pm.tile);
 
             let PMTILES_URL = "https://mizmay.github.io/WebMapStarterKit/MyData.pmtiles";
 
             const p = new pmtiles.PMTiles(PMTILES_URL);
 
             // this is so we share one instance across the JS code and the map renderer
-            protocol.add(p);
+            pm.add(p);
 
             // we first fetch the header so we can get the center lon, lat of the map.
             p.getHeader().then(async h => {
@@ -42,10 +42,6 @@
                     center: [h.centerLon, h.centerLat],
                     style: "./map_layers.json"
                 });
-
-                // fetch the interactive layer as geoJSON
-                let res = await fetch('./interaction.geojson');
-                let data = await res.json();
 
                 // add the geojson data as a source + layer to the map
                 map.addSource("interaction", { type: "geojson", data });
