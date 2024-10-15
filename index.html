@@ -51,8 +51,15 @@
                                 type: "vector",
                                 url: "pmtiles://" + PMTILES_URL,
                                 attribution: '© <a href="https://electionlab.mit.edu/data">MIT Election Lab</a>, <a href="https://www.naturalearthdata.com/">Natural Earth</a>',
-                            }
+                            },
+                            "openmaptiles": {
+                                type: "vector",
+                                scheme: "xyz",
+                                url: "https://tiles.stadiamaps.com/data/openmaptiles.json"
+                                },
                         },
+                        "sprite": "https://tiles.stadiamaps.com/styles/alidade-smooth/sprite",
+                        "glyphs": "https://tiles.stadiamaps.com/fonts/{fontstack}/{range}.pbf",
                         layers: [
                             {
                                 'id': 'counties',
@@ -72,7 +79,55 @@
                                             'fill-outline-color': 'black',
                                             'fill-opacity': [ 'case', ['==', ['get', 'swing'], 1], 1, 0]
                                         }
-                            }
+                            },
+                            {
+                                'id': 'major_city',
+                                'type': 'symbol',
+                                'source': 'openmaptiles',
+                                'source-layer': 'place',
+                                'minzoom': 4,
+                                'filter': [
+                                    "all",
+                                    ["==", "$type", "Point"],
+                                    [
+                                    "all",
+                                    ["<=", "rank", 5],
+                                    ["==", "class", "city"]
+                                    ]
+                                ],
+                                'layout': {
+                                    'text-size': {'stops': [[4, 11], [12, 18], [14, 22]], 'base': 1},
+                                    'icon-image': {'base': 1, 'stops': [[0, 'circle-11'], [8, '']]},
+                                    'text-font': ['Stadia Regular'],
+                                    'text-justify': 'left',
+                                    'visibility': 'visible',
+                                    'text-offset': [0.5, 0.2],
+                                    'icon-size': 0.4,
+                                    'text-anchor': {'base': 1, 'stops': [[0, 'left'], [8, 'center']]},
+                                    'text-field': [
+                                    'concat',
+                                    ['get', 'name:latin'],
+                                    [
+                                        "case",
+                                        [
+                                        "all",
+                                        ["has", "name:nonlatin"],
+                                        ["is-supported-script", ["get", "name:nonlatin"]]
+                                        ],
+                                        ["concat", "\n", ["get", "name:nonlatin"]],
+                                        ""
+                                    ]
+                                    ],
+                                    'text-line-height': 1.55
+                                },
+                                "paint": {
+                                    "text-color": "rgb(117, 129, 145)",
+                                    "text-halo-color": "rgb(242,243,240)",
+                                    "text-halo-width": 1,
+                                    "text-halo-blur": 1,
+                                    "icon-opacity": 0.7
+                                }
+                            },
                         ]
                     }
                 });
@@ -95,7 +150,7 @@
                     popup.setHTML(`
                         <p>
                             <b>${feature.properties.winner}</b> won this county in 2020 with  
-                            <b>${feature.properties.votes}</b> votes, <b>${feature.properties.votes_sqkm}</b> 
+                            <b>${feature.properties.votes}</b> votes, which is approximately <b>${feature.properties.votes_sqkm}</b> 
                             votes per square kilometer.
                         </p>
                     `);
