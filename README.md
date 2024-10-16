@@ -19,7 +19,7 @@ Follow these steps to help test my theory:
 3. Get the example working locally via your personal computer
 4. Make some tweaks to the style in the reference layer
 5. Swap out the data with your own PMTiles archive
-6. File a PR to share your map back to the projects page [ WIP ]
+6. File a PR to share your map back to the projects page
    
 ### 1. Fork or clone this repo to your Github account
 
@@ -62,7 +62,7 @@ Then I can view my progress in any broswer via a local port, default in this cas
 
 You can use any text editor for this, and preview your changes by setting up a local server (assuming you have [Node](https://runjs.app/blog/how-to-start-a-node-server) or [Python](https://realpython.com/python-http-server/) installed).
 
-### 5. Edit the reference map layers via the stylesheet
+### 4. Edit the reference map layers via the stylesheet
 
 For the purposes of this excercise I kept the stylesheet embedded within the default `index.html` page. You'll see it has three main things:
 
