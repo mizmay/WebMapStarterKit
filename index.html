@@ -56,11 +56,16 @@
                                 type: "vector",
                                 scheme: "xyz",
                                 url: "https://tiles.stadiamaps.com/data/openmaptiles.json"
-                                },
+                            },
                         },
                         "sprite": "https://tiles.stadiamaps.com/styles/alidade-smooth/sprite",
                         "glyphs": "https://tiles.stadiamaps.com/fonts/{fontstack}/{range}.pbf",
                         layers: [
+                            {
+                                "id": "background",
+                                "type": "background",
+                                "paint": {"background-color": "rgb(182, 182, 182)"}
+                            },
                             {
                                 'id': 'counties',
                                 'source': 'MyData',
@@ -81,27 +86,6 @@
                                         }
                             },
                             {
-                                'id': 'state_labels',
-                                'source': 'MyData',
-                                'source-layer': 'swing_state_labels',
-                                'type': 'symbol',
-                                'minzoom': 3,
-                                'layout': {
-                                    'text-field': ['get','name'],
-                                    'text-size': {'stops': [[3, 10], [10, 18]], 'base': 1},
-                                    'text-font': ['Stadia Regular'],
-                                    "text-transform": "uppercase",
-                                    "text-letter-spacing": 0.25,
-                                    "symbol-avoid-edges": true,
-                                },
-                                'paint': {
-                                    "text-color": "rgb(117, 129, 145)",
-                                    "text-halo-color": "rgb(242,243,240)",
-                                    "text-halo-width": 1,
-                                    "text-halo-blur": 1,
-                                }
-                            },
-                            {
                                 'id': 'major_city_label',
                                 'type': 'symbol',
                                 'source': 'openmaptiles',
@@ -112,7 +96,7 @@
                                     ["==", "$type", "Point"],
                                     [
                                     "all",
-                                    ["<=", "rank", 5],
+                                    ["<=", "rank", 4],
                                     ["==", "class", "city"]
                                     ]
                                 ],
@@ -146,6 +130,27 @@
                                     "text-halo-width": 1,
                                     "text-halo-blur": 1,
                                     "icon-opacity": 0.7
+                                }
+                            },
+                            {
+                                'id': 'state_labels',
+                                'source': 'MyData',
+                                'source-layer': 'swing_state_labels',
+                                'type': 'symbol',
+                                'minzoom': 3,
+                                'layout': {
+                                    'text-field': ['get','name'],
+                                    'text-size': {'stops': [[3, 10], [10, 18]], 'base': 1},
+                                    'text-font': ['Stadia Regular'],
+                                    "text-transform": "uppercase",
+                                    "text-letter-spacing": 0.2,
+                                    "symbol-avoid-edges": true,
+                                },
+                                'paint': {
+                                    "text-color": "rgb(117, 129, 145)",
+                                    "text-halo-color": "rgb(242,243,240)",
+                                    "text-halo-width": 1,
+                                    "text-halo-blur": 1,
                                 }
                             },
                         ]
