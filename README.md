@@ -71,7 +71,7 @@ For the purposes of this excercise I kept the stylesheet embedded within the def
 2. [OpenMapTiles](https://openmaptiles.org) via [Stadia Maps](https://stadiamaps.com), which I use for reference layers, in this case city labels. OpenMapTiles is an open source schema for vector tiles, Stadia Maps hosts tiles and styles built from this schema via their servers and allows lightweight users like us to access them via an account with a free tier (which means if this tutorial goes viral will owe them $$$, uh oh).
 
 #### Sprites and fonts
-I am using my Stadia account to access the sprites and fonts they host, as that keeps things serverless for me :). For my example, I only need the spritesheet for the townspot (city dot) and I am using their fonts for my city and state labels.
+I am using my [Stadia account](https://client.stadiamaps.com/dashboard/#/overview) to access the sprites and fonts they host, as that keeps things serverless for me :). For my example, I only need the spritesheet for the townspot (city dot) and I am using their fonts for my city and state labels.
 
 #### Map Layers
 
@@ -146,4 +146,6 @@ This will take a good amount of trial and error if you haven't done it before, s
 
 ### 6. File a PR to share your map back to the projects page
 
-Once you've modified this map or used this tutorial to create your own map, I'd love to see it! Share it back by adding an `iframe` to [this page](./share_page.html) NOTE: be sure you have the latest and greatest version first. 
+Once you've modified this map or used this tutorial to create your own map, I'd love to see it! Share it back by adding an `iframe` to [this page](./share_page.html) NOTE: be sure you have the latest and greatest version first.
+
+If you kept or reincorporated anything hosted by [Stadia Maps](https://stadiamaps.com), please remember to [create your own acount](https://client.stadiamaps.com/dashboard/#/overview)!
