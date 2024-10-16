@@ -4,7 +4,8 @@ This excercise was prepared for Practical Cartography Day at NACIS 2024 in Tacom
 
 You are invited to modify this election map showing results of the 2020 election by county, with the "swing states" outlined in black:
 
-<iframe src="./index.html" frameborder="0" height="500" width="900" name="demo_map" title="WebMapStarterKit: 2020 Election Results by Voter Density, with Swing States!"></iframe>
+![WebMapStarterKit Demo Map](./WebMapStarterKit_ElectionMap.png)
+[View live map here](https://mizmay.github.io/WebMapStarterKit/)
 
 Here's the Abstract of my talk: 
 
