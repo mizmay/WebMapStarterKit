@@ -2,7 +2,11 @@
 
 This excercise was prepared for Practical Cartography Day at NACIS 2024 in Tacoma, Washington.
 
-Here's the Abstract: 
+You are invited to modify this election map showing results of the 2020 election by county, with the "swing states" outlined in black:
+
+<iframe src="./index.html" frameborder="0" height="500" width="900" name="demo_map" title="WebMapStarterKit: 2020 Election Results by Voter Density, with Swing States!"></iframe>
+
+Here's the Abstract of my talk: 
 
 > Ever wondered how you can create custom web maps for your portfolio, passion project, or job WITHOUT setting up a tile server, web server, or cloud services account? Hoping to do it without too much coding or cost? Got some maps you made and just want to display with a little bit of interactivity? This talk will walk you quickly through what you need to do to create and show interactive web maps serverlessly with PMtiles, Protomaps JS, and MapLibre.
 
