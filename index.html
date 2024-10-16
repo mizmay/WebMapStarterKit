@@ -62,6 +62,31 @@
                         "glyphs": "https://tiles.stadiamaps.com/fonts/{fontstack}/{range}.pbf",
                         layers: [
                             {
+                                'id': 'background',
+                                'type': 'background',
+                                'paint': { 'background-color' : '#A1A1A1' }
+                            },
+                            {
+                                'id': 'land',
+                                'source': 'MyData',
+                                'source-layer': 'land',
+                                'type': 'fill',
+                                'paint': {
+                                    'fill-color': '#ffffff',
+                                    'fill-opacity': 0.8
+                                }
+
+                            },
+                            {
+                                'id': 'states',
+                                'source': 'MyData',
+                                'source-layer': 'states',
+                                'type': 'fill',
+                                'paint': {  'fill-color': '#ffffff',
+                                            'fill-outline-color': [ 'case', ['==', ['get', 'swing'], 1], 'black', 'transparent'],
+                                        }
+                            },
+                            {
                                 'id': 'counties',
                                 'source': 'MyData',
                                 'source-layer': 'counties',
@@ -69,16 +94,6 @@
                                 'paint': {
                                     'fill-color': ['get','fill_color'],
                                 }
-                            },
-                            {
-                                'id': 'states',
-                                'source': 'MyData',
-                                'source-layer': 'states',
-                                'type': 'fill',
-                                'paint': {  'fill-color': 'transparent',
-                                            'fill-outline-color': 'black',
-                                            'fill-opacity': [ 'case', ['==', ['get', 'swing'], 1], 1, 0]
-                                        }
                             },
                             {
                                 'id': 'major_city_label',
