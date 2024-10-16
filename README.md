@@ -140,3 +140,5 @@ WebMapStarterKit % tile-join -o MyData.pmtiles *.pmtiles
 This will take a good amount of trial and error if you haven't done it before, so be patient with yourself, plan out ahead what layers you want to incorporate into your map, and don't hesitate to reach out to me or someone else if you get stuck or don't know how to do something.
 
 ### 6. File a PR to share your map back to the projects page
+
+Once you've modified this map or used this tutorial to create your own map, I'd love to see it! Share it back by adding an `iframe` to [this page](./share_page.html) NOTE: be sure you have the latest and greatest version first. 
