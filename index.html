@@ -184,8 +184,8 @@
                     popup.setLngLat(event.lngLat);
                     popup.setHTML(`
                         <p>
-                            <b>${feature.properties.winner}</b> won this county in 2020 with  
-                            <b>${feature.properties.votes}</b> votes, which is approximately <b>${feature.properties.votes_sqkm}</b> 
+                            <b>${feature.properties.winner}</b> won <b>${feature.properties.name} County, ${feature.properties.state}</b> in 2020 with  
+                            <b>${feature.properties.votes}</b> votes, approximately <b>${feature.properties.votes_sqkm}</b> 
                             votes per square kilometer.
                         </p>
                     `);
