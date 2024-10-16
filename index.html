@@ -34,7 +34,7 @@
             let pm = new pmtiles.Protocol();
             maplibregl.addProtocol("pmtiles",pm.tile);
 
-            let PMTILES_URL = "https://mizmay.github.io/WebMapStarterKit/MyData.pmtiles";
+            let PMTILES_URL = "./MyData.pmtiles";
             const p = new pmtiles.PMTiles(PMTILES_URL);
             pm.add(p);
 
@@ -61,11 +61,6 @@
                         "sprite": "https://tiles.stadiamaps.com/styles/alidade-smooth/sprite",
                         "glyphs": "https://tiles.stadiamaps.com/fonts/{fontstack}/{range}.pbf",
                         layers: [
-                            {
-                                "id": "background",
-                                "type": "background",
-                                "paint": {"background-color": "rgb(182, 182, 182)"}
-                            },
                             {
                                 'id': 'counties',
                                 'source': 'MyData',
