@@ -93,7 +93,7 @@ I've got just six layers defined. They will be rendered in order, with the last 
 
 When you prepare your data in your favorite GIS environment, include attributes for anything you want to style variably. This may seem like a hassle, but it is easier than manually editing rule-based logic in a style JSON.
 
-In the example case, I styled the counties as red or blue based on whether the Republican or Democrat won> I used HEX values; the last two digits define opacity based on relative vote density as a proxy for population density. The logic goes something like this:
+In the example case, I styled the counties as red or blue based on whether the Republican or Democrat won. I used HEX values; the last two digits define opacity based on relative vote density as a proxy for population density. The logic goes something like this:
 
 ```
 CASE
@@ -116,7 +116,7 @@ WHEN "party" = 'REPUBLICAN' THEN
 END
 ```
 
-I also created and exported GeoJSONs in QGIS for outlining and labeling the "swing states", aka states that were won by > 3% in 2020.
+I also created and exported GeoJSONs in QGIS for outlining and labeling the "swing states", aka states that were won by < 3% in 2020.
 
 I created the PMTiles archive using <a href="https://github.com/felt/tippecanoe">Tippecanoe</a> at the command line on OSX, if you are on a Windows machine you may need to search around for solutions to make this work.
 
