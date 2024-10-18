@@ -7,11 +7,11 @@ You are invited to modify this election map showing results of the 2020 election
 ![WebMapStarterKit Demo Map](./WebMapStarterKit_ElectionMap.png)
 [View live map here](https://mizmay.github.io/WebMapStarterKit/)
 
-Here's the Abstract of my talk: 
+Here's the abstract of my talk: 
 
 > Ever wondered how you can create custom web maps for your portfolio, passion project, or job WITHOUT setting up a tile server, web server, or cloud services account? Hoping to do it without too much coding or cost? Got some maps you made and just want to display with a little bit of interactivity? This talk will walk you quickly through what you need to do to create and show interactive web maps serverlessly with PMtiles, Github Pages, and MapLibre.
 
-This work is informed by ongoing efforts to rehab old portfolio pieces of mine (see [this repo](https://github.com/mizmay/RentAffordability) for example). I'm undertaking it because I think converting small personal projects to portfolio pieces *as web maps* should be easier and more reoutinely undertaken by cartographers.
+This project is informed by ongoing efforts to rehab old portfolio pieces of mine (see [this repo](https://github.com/mizmay/RentAffordability) for example). I'm undertaking it because I think converting small personal projects to portfolio pieces *as web maps* should be easier and more reoutinely undertaken by cartographers.
 
 Follow these steps to help test my theory:
 1. Fork or clone this repo to your Github account
